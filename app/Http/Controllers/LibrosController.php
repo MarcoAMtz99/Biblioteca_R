@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\libro;
+use App\Models\libros;
 use Illuminate\Http\Request;
 
-class LibroController extends Controller
+class LibrosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class LibroController extends Controller
     public function index()
     {
         //
-        return view('create');
+      
+        return view('Libros.create');
     }
 
     /**
@@ -26,7 +27,6 @@ class LibroController extends Controller
     public function create()
     {
         //
-        return "Aqui es el crear formulario";
     }
 
     /**
@@ -38,55 +38,64 @@ class LibroController extends Controller
     public function store(Request $request)
     {
         //
-        return "Aqui es el agregar a la DB";
+        $request->validate([
+            'name'=>'required|string',
+            'autor'=>'required|string',
+            'imagen'=>'required|string|min:2|max:100'
+        ]);
+
+       /*  $libro = new Libro();
+        $libro ->name = $request->name;
+        $libro ->autor = $request->autor;
+        $libro ->imagen = $request->imagen; */
+        Libros::create($request->all());
+
+        /* dd($request); */
+        return back()->with('status','El libro se ha creado');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\libro  $libro
+     * @param  \App\Models\libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function show(libro $libro)
+    public function show(libros $libros)
     {
         //
-        return "Aqui es el mostar por id";
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\libro  $libro
+     * @param  \App\Models\libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function edit(libro $libro)
+    public function edit(libros $libros)
     {
         //
-        return "Aqui es el editar";
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\libro  $libro
+     * @param  \App\Models\libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, libro $libro)
+    public function update(Request $request, libros $libros)
     {
         //
-        return "Aqui es el actualizar";
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\libro  $libro
+     * @param  \App\Models\libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function destroy(libro $libro)
+    public function destroy(libros $libros)
     {
         //
-        return "Aqui es el eliminar";
     }
 }

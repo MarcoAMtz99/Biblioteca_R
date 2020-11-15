@@ -14,7 +14,7 @@
                     @endif
                     <br>
                     <div class="card-title">
-                        <h1 style="color:white;">{{ __('Bienvenida de nuevo') }} </h1> 
+                        <h1 style="color:white;">{{ __('Bienvenida de nuevo ') }}  {{ Auth::user()->name }} </h1> 
                     </div>
                    
                     <div class="col-sm">
@@ -22,16 +22,7 @@
                         <a href="#"  class="btn btn-primary">Ver libros </a>
                        
                     </div>
-                    
-                  
-                    <div class="card" style="width: 18rem;"> 
-                        <div class=".col-xl-">
-                            <a href="#"  class="btn btn-primary">Crear nuevo libro</a>
-                            <a href="#"  class="btn btn-primary">Ver libros </a>
-        
-                           </div>
-                    </div>
-                  
+   
                     <br>
                     <br>
                     <br>
