@@ -12,11 +12,17 @@ class LibrosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         //
-      
-        return view('Libros.create');
+        $libros = Libros::get();
+        return view('Libros.index',compact('libros'));
+        
     }
 
     /**
@@ -27,6 +33,7 @@ class LibrosController extends Controller
     public function create()
     {
         //
+        return view('Libros.create');
     }
 
     /**
@@ -63,6 +70,7 @@ class LibrosController extends Controller
     public function show(libros $libros)
     {
         //
+        return Libros::active()->get();
     }
 
     /**
@@ -71,9 +79,11 @@ class LibrosController extends Controller
      * @param  \App\Models\libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function edit(libros $libros)
+    public function edit($id)
     {
         //
+        $libro = Libros::findOrFail($id);
+        return view('libros.edit',compact('libro'));
     }
 
     /**
@@ -83,9 +93,16 @@ class LibrosController extends Controller
      * @param  \App\Models\libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, libros $libros)
+    public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'name'=>'required|string',
+            'autor'=>'required|string',
+            'imagen'=>'required|string|min:2|max:100'
+        ]);
+        Libros::findOrFail($id)->update($request->all());
+        return back()->with('status','El libro se ha actualizado');
     }
 
     /**
@@ -94,8 +111,10 @@ class LibrosController extends Controller
      * @param  \App\Models\libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function destroy(libros $libros)
+    public function destroy($id)
     {
         //
+        libros::findOrFail($id)->delete();
+        return back()->with('status','El libro se ha eliminado');
     }
 }

@@ -18,8 +18,8 @@
                     </div>
                    
                     <div class="col-sm">
-                        <a href="#"  class="btn btn-primary">Crear nuevo libro</a>
-                        <a href="#"  class="btn btn-primary">Ver libros </a>
+                        <a href="{{route('libros.create')}}"  class="btn btn-primary">Crear nuevo libro</a>
+                        <a href="{{route('libros.index')}}"  class="btn btn-primary">Ver libros </a>
                        
                     </div>
    
